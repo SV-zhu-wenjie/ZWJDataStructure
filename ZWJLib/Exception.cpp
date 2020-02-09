@@ -12,12 +12,13 @@ void Exception::init(const char *message, const char *file, int line)
         char sl[16]= {0};
         itoa(line, sl, 10);
         _location = static_cast<char*>(malloc(strlen(file) + strlen(sl) + 2));
-        _location = strcpy(_location, file);
-        _location = strcat(_location, ":");
-        _location = strcat(_location, sl);
+        if (_location != NULL) {
+            _location = strcpy(_location, file);
+            _location = strcat(_location, ":");
+            _location = strcat(_location, sl);
+            }
     } else
         _location = NULL;
-
 }
 
 Exception::Exception(const char *message)

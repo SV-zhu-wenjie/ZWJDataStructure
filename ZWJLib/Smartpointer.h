@@ -1,10 +1,12 @@
 #ifndef SMARTPOINTER_H
 #define SMARTPOINTER_H
 
+#include "Object.h"
+
 namespace ZWJ
 {
 template <typename T>
-class SmartPoint
+class SmartPoint : public Object
 {
  protected:
     T* smartPoint;
