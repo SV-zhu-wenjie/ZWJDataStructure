@@ -6,8 +6,12 @@ namespace ZWJ {
 template <typename T>
 class List : public Object
 {
+protected:
+    List(const List<T>&);
+    List<T>& operator = (const List<T>&);
 
 public:
+    List() {}
     virtual bool insert(int i, const T &e) = 0;
     virtual bool remove(int i) = 0;
     virtual bool set(int i, const T &e) = 0;
