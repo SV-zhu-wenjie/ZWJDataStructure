@@ -10,4 +10,6 @@ SOURCES += main.cpp \
 HEADERS += \
     Smartpointer.h \
     Exception.h \
-    Object.h
+    Object.h \
+    List.h \
+    Seqlist.h
