@@ -61,7 +61,4 @@ public:
 };
 
 }
-
-
-
 #endif // DYNAMICLIST_H
