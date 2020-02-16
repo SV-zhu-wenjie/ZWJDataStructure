@@ -17,4 +17,5 @@ HEADERS += \
     Dynamiclist.h \
     array.h \
     StaticArray.h \
-    DynamicArray.h
+    DynamicArray.h \
+    LinkList.h

@@ -10,7 +10,7 @@ class DynamicArray : public Array<T>
 protected:
     int _length;
  //     T *copy (const T*t, int n)
-    T *copy (const T*t, int len, int newLen)
+    T *copy (const T*t, int len, int newLen)// O(min(len, newlen)
     {
         T *temp = new T[newLen];
         if (temp != nullptr) {
