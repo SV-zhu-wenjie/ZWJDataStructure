@@ -59,7 +59,15 @@ public:
         _length = 0;
     }
 
+    int find(const T &e)
+    {
+        int ret = -1;
+        for (int i = 0; i < _length; ++i)
+            if (_array[i] == e)
+                return i;
+        return ret;
 
+    }
     // 数组访问方式
     T& operator [](int i)
     {
@@ -75,6 +83,7 @@ public:
         return (const_cast<SeqList<T>&>(*this))[i];
 
     }
+
 
     virtual int capacity() const = 0;
 };

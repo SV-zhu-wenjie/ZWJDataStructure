@@ -20,7 +20,7 @@ protected:
     } _header;
     int  _length;
 
-    Node * position(int i) const
+    Node * position(int i) const // O(n)
     {
         Node *curNode = reinterpret_cast<Node*>(&_header);
         for (int p = 0; p < i; ++p)
@@ -135,6 +135,23 @@ public:
         _length = 0;
 
     }
+
+    int find (const T &e)
+    {
+        int ret = -1;
+        int i = 0;
+        Node *node = _header.next;
+        while(node != NULL) {
+            if (node->vale == e) {
+                ret = i;
+                break;
+            }
+            node = node->next;
+            ++i;
+        }
+        return ret;
+    }
+
     ~LinkList()
     {
         clear();
