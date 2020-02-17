@@ -13,7 +13,7 @@ protected:
     typedef typename LinkList<T>::Node Node;
     struct SNode : public Node
     {
-        void *operator new(size_t  size, void *loc)
+        void *operator new(size_t, void *loc)
         {
             return loc;
         }
@@ -35,7 +35,7 @@ protected:
         SNode *ret = NULL;
         for (int i = 0; i < N; ++i)
             if (!_used[i]) {
-                ret = reinterpret_cast<Node*>(_space) + i;
+                ret = reinterpret_cast<SNode*>(_space) + i;
                 ret = new(ret)SNode();
                 _used[i] = true;
                 break;
@@ -45,7 +45,7 @@ protected:
     void destory(Node *p)
     {
         SNode *space = reinterpret_cast<SNode*>(_space);
-        SNode *psn = dynamic_cast<SNode*>(pn);
+        SNode *psn = dynamic_cast<SNode*>(p);
         for (int i = 0; i < N; ++i) {
             if(psn == (space + i)) {
                 _used[i]= false;
@@ -64,6 +64,10 @@ public:
         for (int i = 0; i < N; ++i)
             _used[i] = false;
 
+    }
+    int capacity()
+    {
+        return N;
     }
 };
 }
