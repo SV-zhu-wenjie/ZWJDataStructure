@@ -19,7 +19,6 @@ protected:
        Node *next = NULL;
     } _header;
     int  _length;
-
     Node * position(int i) const // O(n)
     {
         Node *curNode = reinterpret_cast<Node*>(&_header);
@@ -27,12 +26,26 @@ protected:
             curNode = curNode->next;
         return curNode;
     }
+    Node *_curNode;
+    int _step;
+
+    virtual Node *create()
+    {
+        return new Node();
+    }
+
+    virtual void destory(Node *p)
+    {
+        delete p;
+    }
 
 public:
     LinkList()
     {
         _header.next = NULL;
         _length = 0;
+        _curNode = NULL;
+        _step = 1;
     }
     bool insert(int i, const T &e)
     {
@@ -56,7 +69,7 @@ public:
 #endif
         bool ref = ((0 <= i) && (i <= _length));
         if (ref) {
-            Node *node = new Node;
+            Node *node = create();
             if (node != NULL) {
                 Node *curNode = position(i);
                 node->vale = e;
@@ -77,7 +90,7 @@ public:
             Node *curNode = position(i);
             Node *node = curNode->next;
             curNode->next = node->next;
-            delete node;
+            destory(node);
             --_length;
         }
         return ref;
@@ -130,7 +143,7 @@ public:
         while (_header.next) {
             Node *toDel = _header.next;
             _header.next = toDel->next;
-            delete toDel;
+            destory(toDel);
         }
         _length = 0;
 
@@ -151,6 +164,45 @@ public:
         }
         return ret;
     }
+
+    bool move(int i, int step = 1)
+    {
+        bool ref = (0 <= i) && (i < _length) && (step > 0);
+        if (ref) {
+            _curNode = position(i)->next;
+            _step = step;
+        }
+        return ref;
+    }
+    bool end()
+    {
+        return (_curNode == NULL);
+
+    }
+
+    T current()
+    {
+        if (!end())
+            return _curNode->vale;
+        else
+            THROW_EXCEPTION(InvalidOperationException, "No value at current position");
+    }
+    bool next()
+    {
+        bool ref  = true;;
+        for (int i = 0; i < _step; ++i)
+            if (!end() && _curNode != NULL)
+                _curNode = _curNode->next;
+            else {
+                ref = false;
+                break;
+            }
+        return ref;
+
+
+
+    }
+
 
     ~LinkList()
     {
