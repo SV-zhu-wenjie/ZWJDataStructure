@@ -8,7 +8,7 @@ template<typename T>
 class DynamicArray : public Array<T>
 {
 protected:
-    int _length;
+    int _length ;
  //     T *copy (const T*t, int n)
     T *copy (const T*t, int len, int newLen)// O(min(len, newlen)
     {
@@ -27,7 +27,8 @@ protected:
             auto temp = _array;
             _array = t;
             _length = n;
-            delete temp;
+            if (temp != NULL)
+                delete temp;
         } else
             THROW_EXCEPTION(NoEnoughMemoryException, "DynamicArray: no enough memory");
     }
@@ -42,8 +43,13 @@ protected:
 
     }
 public:
-    DynamicArray(int n)
+    DynamicArray(int n = 0)
     {
+        if (n == 0) {
+            _length = 0;
+            _array = NULL;
+            return;
+        }
         init (new T[n], n);
     }
 
@@ -65,6 +71,7 @@ public:
     DynamicArray<T>& operator = (const DynamicArray<T> &array)
     {
         update(copy(array._array, _length, array.length()), array.length());
+        return *this;
     }
 
     int length() const
@@ -76,7 +83,7 @@ public:
     {
         if (length == _length)
             return;
-        update(copy(_array, _legnth, length), length);
+        update(copy(_array, _length, length), length);
     }
     //
     ~DynamicArray()

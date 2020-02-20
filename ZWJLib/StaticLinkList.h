@@ -69,6 +69,10 @@ public:
     {
         return N;
     }
+    ~StaticLinkList()
+    {
+       clear();
+    }
 };
 }
 #endif // STATICLINKLIST_H

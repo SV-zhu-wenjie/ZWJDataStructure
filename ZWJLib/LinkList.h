@@ -90,8 +90,12 @@ public:
             Node *curNode = position(i);
             Node *node = curNode->next;
             curNode->next = node->next;
-            destory(node);
+            if (_curNode == node)
+                _curNode = node->next;
+            // exception safe
             --_length;
+            destory(node);
+
         }
         return ref;
     }
@@ -143,10 +147,10 @@ public:
         while (_header.next) {
             Node *toDel = _header.next;
             _header.next = toDel->next;
+            _length--;
             destory(toDel);
         }
         _length = 0;
-
     }
 
     int find (const T &e)
