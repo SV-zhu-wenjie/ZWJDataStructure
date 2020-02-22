@@ -112,7 +112,7 @@ public:
 
     }
 
-    bool get(int i, T&e)
+    bool get(int i, T&e) const
     {
         bool ref = ((0 <= i) && (i < _length));
         if (ref) {
@@ -121,7 +121,8 @@ public:
         }
         return ref;
     }
-    T get(int i) {
+    T get(int i) const
+    {
         bool ref = ((0 <= i) && (i < _length));
         if (ref) {
             Node *curNode = position(i);
@@ -169,7 +170,7 @@ public:
         return ret;
     }
 
-    bool move(int i, int step = 1)
+    virtual bool move(int i, int step = 1)
     {
         bool ref = (0 <= i) && (i < _length) && (step > 0);
         if (ref) {
@@ -178,7 +179,7 @@ public:
         }
         return ref;
     }
-    bool end()
+    virtual bool end()
     {
         return (_curNode == NULL);
 

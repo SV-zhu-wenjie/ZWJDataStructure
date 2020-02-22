@@ -21,4 +21,5 @@ HEADERS += \
     LinkList.h \
     StaticLinkList.h \
     Pointer.h \
-    Sharedpointer.h
+    Sharedpointer.h \
+    CircleList.h
