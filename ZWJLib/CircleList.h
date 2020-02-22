@@ -115,7 +115,18 @@ public:
     }
 };
 
-
+void josephus(int n, int s, int m)
+{
+    CircleList<int> cl;
+    for (int i = 0; i < n; ++i)
+        cl.insert(i, i + 1);
+    cl.move(s-1, m-1);
+    while(cl.length() > 0) {
+        cl.next();
+        cout << cl.current() << endl;
+        cl.remove(cl.find(cl.current()));
+    }
+}
 
 }
 
