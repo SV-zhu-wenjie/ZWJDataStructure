@@ -77,8 +77,13 @@ public:
 
     int find (const T&e) const
     {
-        e;
-        return -1;
+        int ref = -1;
+        for (int i = 0; i < _length; ++i)
+            if (get(i) == e) {
+                ref = i;
+                break;
+            }
+        return ref;
     }
 
     void clear()
