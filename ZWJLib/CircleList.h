@@ -22,7 +22,7 @@ protected:
     }
     int mod(int i) const
     {
-        return _length == 0 ? 0 : i %_length;
+        return _length == 0 ? 0 : (i %_length);
     }
 
 public:
