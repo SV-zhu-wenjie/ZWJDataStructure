@@ -21,6 +21,8 @@ protected:
        Node *pre;
     } _header;
     int  _length;
+    Node *_curNode;
+    int _step;
     Node * position(int i) const // O(n)
     {
         Node *curNode = reinterpret_cast<Node*>(&_header);
@@ -28,8 +30,7 @@ protected:
             curNode = curNode->next;
         return curNode;
     }
-    Node *_curNode;
-    int _step;
+
 
     virtual Node *create()
     {
@@ -168,7 +169,7 @@ public:
 
     }
 
-    T current()
+    virtual T current()
     {
         if (!end())
             return _curNode->vale;
